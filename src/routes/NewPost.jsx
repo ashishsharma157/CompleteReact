@@ -1,7 +1,9 @@
 import { useState } from "react";
 import classes from "./NewPost.module.css";
+import Modal from "../component/Modal";
+import { Link } from "react-router-dom";
 
-function NewPost({ onCancel, onAddPost }) {
+function NewPost({ onAddPost }) {
   const [body, setBody] = useState("");
   const [author, setAuthor] = useState("");
   function bodyChangeHandler(event) {
@@ -22,6 +24,7 @@ function NewPost({ onCancel, onAddPost }) {
   }
 
   return (
+    <Modal>
     <form className={classes.form} onSubmit={submitHandler}>
       <p>
         <label htmlFor="body">Text</label>
@@ -32,12 +35,13 @@ function NewPost({ onCancel, onAddPost }) {
         <input type="text" id="name" required onChange={autherChangeHandler} />
       </p>
       <p className={classes.actions}>
-        <button type="button" onClick={onCancel}>
+        <Link to='..' type="button">
           Cancel
-        </button>
+        </Link>
         <button>Submit</button>
       </p>
     </form>
+    </Modal>
   );
 }
 
