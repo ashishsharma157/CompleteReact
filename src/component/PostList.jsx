@@ -1,12 +1,10 @@
-
 import { useLoaderData } from "react-router-dom";
 import Post from "./Post";
 
 import classes from "./PostList.module.css";
 
-
 function PostList() {
-  const posts=useLoaderData();
+  const posts = useLoaderData();
   //const [posts, setPosts] = useState([]);
   //const [isFetching, setIsFetching] = useState(false);
 
@@ -35,12 +33,15 @@ function PostList() {
 
   return (
     <>
-
       <ul className={classes.posts}>
-        {
-          posts.length > 0 &&
-          posts.map((post, index) => (
-            <Post key={index} author={post.author} body={post.body} />
+        {posts.length > 0 &&
+          posts.map((post) => (
+            <Post
+              key={post.id}
+              id={post.id}
+              author={post.author}
+              body={post.body}
+            />
           ))}
       </ul>
     </>
