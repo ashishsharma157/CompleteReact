@@ -2,9 +2,9 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./index.css";
-import NewPost from "./routes/NewPost.jsx";
+import NewPost, {action as PostAction} from "./routes/NewPost.jsx";
 import RootLayout from "./routes/RootLayout.jsx";
-import Posts from "./routes/Posts.jsx";
+import Posts, { loader as PostLoader } from "./routes/Posts.jsx";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +14,8 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Posts />,
-        children: [{ path: "/create-post", element: <NewPost /> }],
+        loader: PostLoader,
+        children: [{ path: "/create-post", element: <NewPost />, action:PostAction }],
       },
     ],
   },

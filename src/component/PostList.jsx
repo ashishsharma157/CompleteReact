@@ -1,41 +1,43 @@
-import { useEffect, useState } from "react";
+
+import { useLoaderData } from "react-router-dom";
 import Post from "./Post";
-import NewPost from "../routes/NewPost";
+
 import classes from "./PostList.module.css";
-import Modal from "./Modal";
+
 
 function PostList() {
-  const [posts, setPosts] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
+  const posts=useLoaderData();
+  //const [posts, setPosts] = useState([]);
+  //const [isFetching, setIsFetching] = useState(false);
 
-  useEffect(() => {
-    async function fetchPost() {
-      setIsFetching(true);
-      const response = await fetch("http://localhost:8080/posts");
-      const resData = await response.json();
-      setPosts(resData.posts);
-      console.log(resData);
-      setIsFetching(false);
-    }
-    fetchPost();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchPost() {
+  //     setIsFetching(true);
+  //     // const response = await fetch("http://localhost:8080/posts");
+  //     // const resData = await response.json();
+  //     setPosts(resData.posts);
+  //     console.log(resData);
+  //     setIsFetching(false);
+  //   }
+  //   fetchPost();
+  // }, []);
 
-  function addPostHandler(postData) {
-    fetch("http://localhost:8080/posts", {
-      method: "POST",
-      body: JSON.stringify(postData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    setPosts((existingPost) => [postData, ...existingPost]);
-  }
+  // function addPostHandler(postData) {
+  //   fetch("http://localhost:8080/posts", {
+  //     method: "POST",
+  //     body: JSON.stringify(postData),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  //   setPosts((existingPost) => [postData, ...existingPost]);
+  // }
 
   return (
     <>
 
       <ul className={classes.posts}>
-        {!isFetching &&
+        {
           posts.length > 0 &&
           posts.map((post, index) => (
             <Post key={index} author={post.author} body={post.body} />
